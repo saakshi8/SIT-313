@@ -1,1 +1,272 @@
 
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DEV@Deakin — My Personal Portfolio" />
+    <title>DEV@Deakin | Portfolio</title>
+
+    <!-- Tailwind CSS via CDN — no installation needed -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS for hovering -->
+    <style>
+      /* Show overlay when parent .banner-wrap is hovered */
+      .banner-wrap:hover .overlay {
+        opacity: 1;
+      }
+    </style>
+
+  </head>
+  <body class="bg-emerald-100 text-gray-800 font-serif">
+
+
+    <!--1. Navigation Bar -->
+    <nav class="bg-cyan-900 flex justify-between items-center px-10 py-4 sticky top-0 z-50">
+
+      
+      <!-- Nav links -->
+      <!-- flex gap-8 → puts links side by side with spacing -->
+      <ul class="flex gap-8 list-none">
+        <li>
+          <a href="#about"
+             class="text-gray-100 text-sm tracking-wide hover:text-rose-400 transition-colors duration-200">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="#work"
+             class="text-gray-100 text-sm tracking-wide hover:text-rose-400 transition-colors duration-200">
+            Work
+          </a>
+        </li>
+        <li>
+          <a href="#contact"
+             class="text-gray-100 text-sm tracking-wide hover:text-rose-400 transition-colors duration-200">
+            Contact
+          </a>
+        </li>
+      </ul>
+
+      <!-- Logo -->
+      <div class="text-rose-300 font-serif text-xl tracking-widest">
+        DEV@Deakin
+      </div>
+
+     
+
+    </nav>
+
+
+    <!-- 2. Banner and image overlay -->
+<div class="banner-wrap relative">
+
+  <!-- Banner image -->
+  <img
+    src="BannerImage.jpg"
+    alt="Banner — coding on a laptop"
+    class="w-full h-96 object-cover object-center"
+  />
+
+  <!-- Overlay bar -->
+  <div class="overlay absolute bottom-0 left-0 w-full
+              bg-rose-500 bg-opacity-60
+              text-white text-center text-2xl font-bold tracking-widest
+              py-5
+              opacity-0 transition-opacity duration-300">
+    Hey, I'm Saakshi
+  </div>
+
+</div>
+
+    <!-- 3. About / Profile Section -->
+    <section id="about" class="flex flex-col items-center py-16 px-6 text-center">
+
+      <!-- Circular photo -->
+      <img
+        src="Profile.png"
+        alt="Profile photo"
+        class="w-28 h-28 rounded-full object-cover border-4 border-rose-200 mb-5"
+      />
+
+      <!-- Bio -->
+      <p class="text-gray-500 text-base max-w-md leading-relaxed mb-6">
+        I am an aspiring software engineer currently in my third semester. I am passionate about technology and graphic designing.
+      </p>
+
+      <!-- Divider line — w-24 = 96px wide, border-t = top border -->
+      <hr class="w-24 border-t-2 border-gray-200 mb-4" />
+
+    </section>
+
+
+    <!--4. Projects Section -->
+    <section id="work" class="bg-gray-100 py-14 px-10">
+
+      <h2 class="text-center text-2xl font-serif font-bold text-rose-950 mb-10 tracking-wide">
+        Here are some of the projects!
+      </h2>
+
+      <!-- flex flex-wrap justify-center gap-6 → cards side by side,
+           wrap to next row on small screens -->
+      <div class="flex flex-wrap justify-center gap-6">
+
+        <!--Project Card 1 -->
+        <div class=" bg-white rounded-xl shadow-md w-72 ">
+          <img
+            src="project1.png"
+            alt="Splashkit Project"
+            class="w-full h-44 object-cover"
+          />
+          <div class="p-5">
+            <h3 class="text-rose-900 font-semibold text-base mb-2">Gaming Arcade</h3>
+            <p class="text-gray-900 text-sm leading-relaxed mb-3">
+              A Gaming arcade built using the splashkit library in c++.
+            </p>
+            <a href="https://github.com/saakshi8/Gaming-arcadee" target="_blank"
+               class="text-pink-950  text-sm font-serif hover:text-fuchsia-500 transition-colors">
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Project Card 2 ── -->
+        <div class="bg-white rounded-xl shadow-md w-72 overflow-hidden">
+          <img
+            src="project2.png"
+            alt="BMI calculator"
+            class="w-full h-44 object-cover"
+          />
+          <div class="p-5">
+            <h3 class="text-rose-900 font-semibold text-base mb-2">BMI Calculator </h3>
+            <p class="text-gray-900 text-sm leading-relaxed mb-3">
+              An interactive data BMI calculator built with HTML, CSS and javascript.
+            </p>
+            <a href="https://github.com/saakshi8/BMI-calculator" target="_blank"
+               class="text-pink-950 text-sm font-serif hover:text-fuchsia-500 transition-colors">
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Project Card 3 ── -->
+        <div class=" bg-white rounded-xl shadow-md w-72 ">
+          <img
+            src="Project3.png"
+            alt=" Weather App"
+            class="w-full h-44 object-cover"
+          />
+          <div class="p-5">
+            <h3 class="text-rose-900 font-semibold text-base mb-2">Weather App</h3>
+            <p class="text-gray-900 text-sm leading-relaxed mb-3">
+              A web interface displaying the weather details when the button is clicked.
+            </p>
+            <a href="https://github.com/saakshi8/Weather-App" target="_blank"
+               class="text-pink-950  text-sm font-serif  hover:text-fuchsia-500 transition-colors">
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 5.My photo gallery  -->
+    <section class="py-14 px-10">
+
+      <hr class="w-24 border-t-2 border-gray-200 mx-auto mb-8" />
+
+      <h2 class="text-center text-2xl font-serif font-bold text-rose-950 mb-8 tracking-wide">
+        My Photo gallery!
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+
+        <img src="image1.jpeg"
+             alt="image 1"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image2.jpeg"
+             alt="image 2"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image3.jpeg"
+             alt="image 3"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image4.jpeg"
+             alt="image 4"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image5.jpeg"
+             alt="image 5"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image6.jpeg"
+             alt="image 6"
+             class="w-full h-48 object-cover rounded-lg" />
+
+        <img src="image7.jpeg"
+           alt="image 7"
+          class="w-full h-48 object-cover rounded-lg" />
+
+         <img src="image8.jpeg"
+           alt="image 8"
+           class="w-full h-48 object-cover rounded-lg" />
+
+      </div>
+    </section>
+
+    <!-- 6. Subscribe Section -->
+<section class="bg-blue-300 py-3 px-4">
+
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+
+    <!-- Heading -->
+    <h2 class="font-serif font-bold text-xl tracking-wide text-cyan-900">
+      SIGN UP TO MY DEV@DEAKIN 
+    </h2>
+
+    <!-- Email input -->
+    <input
+      id="email"
+      type="email"
+      placeholder="Enter your email"
+      class="w-64 h-8 px-2 border border-teal-500 bg-white
+             text-sm "
+    />
+
+    <!-- Subscribe button -->
+    <button
+      id="subscribe"
+      type="button"
+      class="h-8 px-4 bg-gray-400 border border-teal-500
+             text-gray-800 text-sm"
+    >
+      Subscribe
+    </button>
+
+    </div>
+
+    <!-- Message returned by server -->
+    <p id="message" class="text-center text-sm mt-2"></p>
+
+</section>
+
+</section>
+    <!-- 6. Footer for the page -->
+    <footer id="contact" class="bg-cyan-950 text-gray-400 text-center py-6 text-sm">
+      <p>
+        © 2026 DEV@Deakin &mdash; Saakshi &mdash;
+        <a href="mailto:saakshi@email.com"
+           class="text-rose-500">
+          saakshi@email.com
+        </a>
+      </p>
+    </footer>
+
+   <script src="script.js"></script>
+  </body>
+</html>
