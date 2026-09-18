@@ -1,0 +1,7 @@
+body {
+    margin: 0;
+}
+
+.banner-wrap:hover .overlay {
+    opacity: 1;
+}
