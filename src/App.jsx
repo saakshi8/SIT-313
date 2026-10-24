@@ -42,8 +42,7 @@ function App()
     return (
         <BrowserRouter>
 
-            <div className="bg-emerald-100 text-gray-800 font-serif min-h-screen">
-
+<div className="bg-emerald-100 text-gray-800 font-serif min-h-screen w-full">
                 <Header />
 
                 <Routes>

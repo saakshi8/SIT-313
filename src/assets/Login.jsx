@@ -1,8 +1,10 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { db, auth } from "../firebase";
 
 function Login()
 {
@@ -32,15 +34,15 @@ function Login()
                 where("email", "==", email)
             );
 
-            const querySnapshot = await getDocs(userQuery);
+            const result = await getDocs(userQuery);
 
-            if (querySnapshot.empty)
+            if (result.empty)
             {
                 setError("Incorrect email or password.");
                 return;
             }
 
-            const userData = querySnapshot.docs[0].data();
+            const userData = result.docs[0].data();
 
             const passwordMatch = await bcrypt.compare(
                 password,
@@ -70,10 +72,37 @@ function Login()
         }
     };
 
-    return (
-        <div className="min-h-screen flex justify-center items-center bg-emerald-100">
+    const handleGoogleLogin = async () =>
+    {
+        setError("");
 
-            <div className="bg-white p-8 rounded-lg shadow-md w-96">
+        try
+        {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify({
+                    name: user.displayName || "",
+                    email: user.email || ""
+                })
+            );
+
+            navigate("/");
+        }
+        catch (error)
+        {
+            console.error("Google login error:", error);
+            setError("Google login failed. Please try again.");
+        }
+    };
+
+    return (
+        <div className="min-h-screen flex justify-center items-center bg-emerald-100 px-4 py-8">
+
+            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
 
                 <h1 className="text-3xl font-bold text-cyan-900 text-center mb-6">
                     Login
@@ -119,6 +148,20 @@ function Login()
                     </button>
 
                 </form>
+
+                <div className="flex items-center gap-3 my-5">
+                    <div className="flex-1 border-t border-gray-300"></div>
+                    <span className="text-sm text-gray-500">OR</span>
+                    <div className="flex-1 border-t border-gray-300"></div>
+                </div>
+
+                <button
+                    type="button"
+                    onClick={handleGoogleLogin}
+                    className="w-full border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-100"
+                >
+                    Continue with Google
+                </button>
 
                 <p className="text-center mt-6 text-gray-600">
 

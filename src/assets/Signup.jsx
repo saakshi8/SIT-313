@@ -109,11 +109,9 @@ function Signup()
                         className="w-full border border-gray-300 rounded-md px-4 py-2 mb-6"
                     />
 
-                    {error && (
                         <p className="text-red-500 text-sm mb-4">
                             {error}
                         </p>
-                    )}
 
                     <button
                         type="submit"
