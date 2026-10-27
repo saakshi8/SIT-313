@@ -27,3 +27,7 @@ node_modules/
 dist/
 .env
 .env.local
+firebase-service-account.json
+server/.env
+.env
+node_modules/

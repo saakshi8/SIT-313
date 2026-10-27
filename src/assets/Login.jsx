@@ -1,10 +1,8 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import bcrypt from "bcryptjs";
-import { collection, getDocs, query, where } from "firebase/firestore";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { db, auth } from "../firebase";
+import { auth } from "../firebase";
 
 function Login()
 {
@@ -27,48 +25,40 @@ function Login()
 
         try
         {
-            const usersRef = collection(db, "users");
+            const response = await fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                })
+            });
 
-            const userQuery = query(
-                usersRef,
-                where("email", "==", email)
-            );
+            const data = await response.json();
 
-            const result = await getDocs(userQuery);
-
-            if (result.empty)
+            if (!response.ok)
             {
-                setError("Incorrect email or password.");
+                setError(data.message || "Incorrect email or password.");
                 return;
             }
 
-            const userData = result.docs[0].data();
+            // Store the JWT token returned by the backend
+            localStorage.setItem("token", data.token);
 
-            const passwordMatch = await bcrypt.compare(
-                password,
-                userData.passwordHash
-            );
-
-            if (!passwordMatch)
-            {
-                setError("Incorrect email or password.");
-                return;
-            }
-
+            // Store the logged-in user's details
             localStorage.setItem(
                 "loggedInUser",
-                JSON.stringify({
-                    name: userData.name,
-                    email: userData.email
-                })
+                JSON.stringify(data.user)
             );
 
             navigate("/");
         }
         catch (error)
         {
-            console.error(error);
-            setError("Login failed. Please try again.");
+            console.error("Login error:", error);
+            setError("Login failed. Please check that the backend is running.");
         }
     };
 
@@ -82,11 +72,13 @@ function Login()
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
+            // Google sign-in still uses Firebase Authentication
             localStorage.setItem(
                 "loggedInUser",
                 JSON.stringify({
                     name: user.displayName || "",
-                    email: user.email || ""
+                    email: user.email || "",
+                    authProvider: "google"
                 })
             );
 
@@ -164,7 +156,6 @@ function Login()
                 </button>
 
                 <p className="text-center mt-6 text-gray-600">
-
                     Don't have an account?{" "}
 
                     <Link
@@ -173,7 +164,6 @@ function Login()
                     >
                         Sign Up
                     </Link>
-
                 </p>
 
             </div>
